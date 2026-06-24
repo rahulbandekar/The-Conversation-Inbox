@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+sprintplan.md
+projectcontext.md
 
 # Editor directories and files
 .vscode/*
