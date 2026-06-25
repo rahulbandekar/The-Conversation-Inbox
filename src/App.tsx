@@ -6,6 +6,7 @@ import ConversationDetail from "./components/ConversationDetail";
 import Skeleton from "./components/ui/Skeleton";
 import EmptyState from "./components/ui/EmptyState";
 import { useConversations } from "./hooks/useConversations";
+import { useKeyboardNav } from "./hooks/useKeyboardNav";
 import type { Conversation, FilterState } from "./types";
 
 const defaultFilter: FilterState = {
@@ -28,9 +29,34 @@ function App() {
     setSelectedId(id);
   }
 
+  function handleDeselect() {
+    setSelectedId(null);
+  }
+
   function handleActionSuccess() {
     refetch();
   }
+
+  useKeyboardNav({
+    conversations,
+    selectedId,
+    onSelect: handleSelect,
+    onDeselect: handleDeselect,
+    onAssign: () => {
+      if (selectedConversation !== null) {
+        void fetch(`/api/conversations/${selectedConversation.id}/assign`, {
+          method: "POST",
+        }).then(() => refetch());
+      }
+    },
+    onResolve: () => {
+      if (selectedConversation !== null) {
+        void fetch(`/api/conversations/${selectedConversation.id}/resolve`, {
+          method: "POST",
+        }).then(() => refetch());
+      }
+    },
+  });
 
   function renderList() {
     if (loading) return <Skeleton />;
