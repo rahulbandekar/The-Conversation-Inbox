@@ -42,12 +42,12 @@ function ActionBar({
       {/* Success messages */}
       {assignState.state === "success" && (
         <p className="text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded px-3 py-2">
-          Conversation assigned to you.
+          Assigned to you. You are now responsible for this conversation.
         </p>
       )}
       {resolveState.state === "success" && (
         <p className="text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded px-3 py-2">
-          Conversation marked as resolved.
+          Conversation resolved. Well done.
         </p>
       )}
 
@@ -62,7 +62,7 @@ function ActionBar({
             aria-label="Assign conversation to me"
           >
             {assignState.state === "loading" && <Spinner />}
-            {isAssigned ? "Assigned" : "Assign to Me"}
+            {isAssigned ? "Assigned to you" : "Assign to Me"}
           </button>
 
           {/* Resolve button */}
@@ -80,7 +80,7 @@ function ActionBar({
 
       {isResolved && (
         <p className="text-xs text-gray-600">
-          This conversation has been resolved.
+          This conversation was resolved and is now closed.
         </p>
       )}
     </div>

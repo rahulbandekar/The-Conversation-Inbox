@@ -74,8 +74,8 @@ function App() {
     if (conversations.length === 0) {
       return (
         <EmptyState
-          title="No conversations found"
-          description="No conversations match your filters. Try adjusting the view."
+          title="No conversations match this filter"
+          description="Try a different status or clear all filters to see everything."
           action={{
             label: "Clear filters",
             onClick: () => setFilter(defaultFilter),
@@ -97,8 +97,8 @@ function App() {
     if (selectedConversation === null) {
       return (
         <EmptyState
-          title="No conversation selected"
-          description="Select a conversation from the list to get started."
+          title="Select a conversation"
+          description="Pick a conversation from the list to view details and take action."
         />
       );
     }
