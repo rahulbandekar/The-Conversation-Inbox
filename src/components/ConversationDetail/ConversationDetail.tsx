@@ -65,22 +65,22 @@ function ConversationDetail({
         {/* Meta row */}
         <div className="flex items-center gap-4 text-xs text-gray-500">
           <span>
-            <span className="text-gray-600">Waiting </span>
+            <span className="text-gray-500">Waiting </span>
             <span className="text-gray-400">
               {formatWaitTime(waitingMinutes)}
             </span>
           </span>
           <span>
-            <span className="text-gray-600">Messages </span>
+            <span className="text-gray-500">Messages </span>
             <span className="text-gray-400">{messageCount}</span>
           </span>
           <span>
-            <span className="text-gray-600">Status </span>
+            <span className="text-gray-500">Status </span>
             <span className="text-gray-400 capitalize">{status}</span>
           </span>
           {assignedTo !== null && (
             <span>
-              <span className="text-gray-600">Assigned to </span>
+              <span className="text-gray-500">Assigned to </span>
               <span className="text-emerald-400">
                 {assignedTo === "You" ? "You" : assignedTo}
               </span>
@@ -105,7 +105,7 @@ function ConversationDetail({
 
       {/* Last Message */}
       <div className="flex-1 overflow-y-auto px-6 py-4">
-        <p className="text-xs text-gray-600 uppercase tracking-wide mb-3 font-medium">
+        <p className="text-xs text-gray-500 uppercase tracking-wide mb-3 font-medium">
           Last message
         </p>
         <div className="bg-gray-900 rounded-lg p-4 border border-gray-800">

@@ -72,7 +72,7 @@ function ConversationItem({
       {/* Row 4 — Badge + meta */}
       <div className="flex items-center gap-2 pl-4">
         <Badge priority={priority} />
-        <span className="text-xs text-gray-600">
+        <span className="text-xs text-gray-500">
           {messageCount} {messageCount === 1 ? "message" : "messages"}
         </span>
         {assignedTo !== null && (
