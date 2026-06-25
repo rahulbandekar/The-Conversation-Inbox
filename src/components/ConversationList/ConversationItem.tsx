@@ -37,6 +37,7 @@ function ConversationItem({
 
   return (
     <button
+      data-conversation-id={id}
       onClick={() => onClick(id)}
       className={`w-full text-left px-4 py-3 border-b border-gray-800/60 transition-colors focus:outline-none focus:ring-1 focus:ring-inset focus:ring-emerald-500 ${
         isSelected
