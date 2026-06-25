@@ -1,6 +1,16 @@
+import { useState } from "react";
 import AppHeader from "./components/ui/AppHeader";
+import FilterBar from "./components/FilterBar";
+import type { FilterState } from "./types";
+
+const defaultFilter: FilterState = {
+  status: "all",
+  sortBy: "urgency",
+};
 
 function App() {
+  const [filter, setFilter] = useState<FilterState>(defaultFilter);
+
   return (
     <div className="h-screen w-screen flex flex-col bg-gray-950 text-gray-100 overflow-hidden">
       {/* Header */}
@@ -10,9 +20,7 @@ function App() {
       <div className="flex flex-1 overflow-hidden">
         {/* Left Panel  */}
         <aside className="w-[35%] border-r border-gray-800 flex flex-col overflow-hidden">
-          <div className="p-4 border-b border-gray-800">
-            <p className="text-xs text-gray-500">Filter bar placeholder</p>
-          </div>
+          <FilterBar filter={filter} onChange={setFilter} />
 
           <div className="flex-1 overflow-y-auto">
             <p className="text-xs text-gray-500 p-4">
