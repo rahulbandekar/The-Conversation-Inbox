@@ -14,9 +14,14 @@ function AppHeader({ conversationCount }: AppHeaderProps) {
           {conversationCount} open
         </span>
       )}
-      <span className="ml-auto text-sm font-bold text-yellow-500">
-        Yellow.ai
-      </span>
+      <div className="ml-auto flex items-center gap-4">
+        <span className="text-xs text-gray-600 hidden sm:block">
+          ↑↓ navigate · A assign · R resolve · Esc deselect
+        </span>
+        <span className="ml-auto text-sm font-bold text-yellow-500">
+          Yellow.ai
+        </span>
+      </div>
     </header>
   );
 }
