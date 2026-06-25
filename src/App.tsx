@@ -2,10 +2,11 @@ import { useState } from "react";
 import AppHeader from "./components/ui/AppHeader";
 import FilterBar from "./components/FilterBar";
 import ConversationList from "./components/ConversationList";
+import ConversationDetail from "./components/ConversationDetail";
 import Skeleton from "./components/ui/Skeleton";
 import EmptyState from "./components/ui/EmptyState";
 import { useConversations } from "./hooks/useConversations";
-import type { FilterState } from "./types";
+import type { Conversation, FilterState } from "./types";
 
 const defaultFilter: FilterState = {
   status: "all",
@@ -18,7 +19,18 @@ function App() {
 
   const { conversations, loading, error, refetch } = useConversations(filter);
 
+  const selectedConversation: Conversation | null =
+    conversations.find((c) => c.id === selectedId) ?? null;
+
   const openCount = conversations.filter((c) => c.status !== "resolved").length;
+
+  function handleSelect(id: string) {
+    setSelectedId(id);
+  }
+
+  function handleActionSuccess() {
+    refetch();
+  }
 
   function renderList() {
     if (loading) return <Skeleton />;
@@ -50,7 +62,26 @@ function App() {
       <ConversationList
         conversations={conversations}
         selectedId={selectedId}
-        onSelect={setSelectedId}
+        onSelect={handleSelect}
+      />
+    );
+  }
+
+  function renderDetail() {
+    if (selectedConversation === null) {
+      return (
+        <EmptyState
+          title="No conversation selected"
+          description="Select a conversation from the list to get started."
+        />
+      );
+    }
+
+    return (
+      <ConversationDetail
+        key={selectedConversation.id}
+        conversation={selectedConversation}
+        onActionSuccess={handleActionSuccess}
       />
     );
   }
@@ -68,12 +99,7 @@ function App() {
 
         {/* Right Panel  */}
         <main className="flex-1 flex flex-col overflow-hidden">
-          <div className="flex-1 flex items-center justify-center">
-            <EmptyState
-              title="No conversation selected"
-              description="Select a conversation from the list to get started."
-            />
-          </div>
+          {renderDetail()}
         </main>
       </div>
     </div>
