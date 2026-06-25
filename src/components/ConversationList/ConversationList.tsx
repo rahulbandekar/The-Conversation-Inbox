@@ -14,8 +14,9 @@ function ConversationList({
 }: ConversationListProps) {
   return (
     <div
-      role="list"
+      role="listbox"
       aria-label="Escalated conversations"
+      aria-multiselectable="false"
       className="flex-1 overflow-y-auto"
     >
       {conversations.map((conversation) => (

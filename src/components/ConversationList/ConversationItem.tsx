@@ -37,14 +37,18 @@ function ConversationItem({
 
   return (
     <button
+      role="option"
       data-conversation-id={id}
       onClick={() => onClick(id)}
+      aria-selected={isSelected}
+      aria-label={`${customerName}, ${subject}, ${priority} priority, ${formatWaitTime(
+        waitingMinutes
+      )}`}
       className={`w-full text-left px-4 py-3 border-b border-gray-800/60 transition-colors focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-500 ${
         isSelected
           ? "bg-gray-800 border-l-2 border-l-emerald-500"
           : "hover:bg-gray-900"
       }`}
-      aria-selected={isSelected}
     >
       {/* Row 1 — Name + wait time */}
       <div className="flex items-center justify-between gap-2 mb-1">
@@ -73,7 +77,7 @@ function ConversationItem({
         </span>
         {assignedTo !== null && (
           <span className="text-xs text-emerald-600 ml-auto">
-            {assignedTo === "You" ? "Assigned to you" : `Assigned`}
+            {assignedTo === "You" ? "Assigned to you" : "Assigned"}
           </span>
         )}
       </div>

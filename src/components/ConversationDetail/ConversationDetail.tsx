@@ -39,7 +39,11 @@ function ConversationDetail({
     useConversationActions(onActionSuccess);
 
   return (
-    <div className="flex flex-col h-full overflow-hidden">
+    <div
+      className="flex flex-col h-full overflow-hidden"
+      role="region"
+      aria-label="Conversation detail"
+    >
       {/* Detail Header */}
       <div className="px-6 py-4 border-b border-gray-800">
         <div className="flex items-start justify-between gap-4 mb-3">
