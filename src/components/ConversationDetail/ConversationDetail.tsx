@@ -1,20 +1,26 @@
-import type { Conversation } from '../../types'
-import Badge from '../ui/Badge'
-import SentimentDot from '../ui/SentimentDot'
+import type { Conversation } from "../../types";
+import Badge from "../ui/Badge";
+import SentimentDot from "../ui/SentimentDot";
+import ActionBar from "./ActionBar";
+import { useConversationActions } from "../../hooks/useConversationActions";
 
 interface ConversationDetailProps {
-  conversation: Conversation
+  conversation: Conversation;
+  onActionSuccess: () => void;
 }
 
 function formatWaitTime(minutes: number): string {
-  if (minutes === 0) return 'Resolved'
-  if (minutes < 60) return `${minutes}m`
-  const hours = Math.floor(minutes / 60)
-  const remaining = minutes % 60
-  return remaining > 0 ? `${hours}h ${remaining}m` : `${hours}h`
+  if (minutes === 0) return "Resolved";
+  if (minutes < 60) return `${minutes}m`;
+  const hours = Math.floor(minutes / 60);
+  const remaining = minutes % 60;
+  return remaining > 0 ? `${hours}h ${remaining}m` : `${hours}h`;
 }
 
-function ConversationDetail({ conversation }: ConversationDetailProps) {
+function ConversationDetail({
+  conversation,
+  onActionSuccess,
+}: ConversationDetailProps) {
   const {
     customerName,
     customerEmail,
@@ -27,11 +33,13 @@ function ConversationDetail({ conversation }: ConversationDetailProps) {
     tags,
     messageCount,
     status,
-  } = conversation
+  } = conversation;
+
+  const { assignState, resolveState, assign, resolve } =
+    useConversationActions(onActionSuccess);
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
-
       {/* Detail Header */}
       <div className="px-6 py-4 border-b border-gray-800">
         <div className="flex items-start justify-between gap-4 mb-3">
@@ -54,7 +62,9 @@ function ConversationDetail({ conversation }: ConversationDetailProps) {
         <div className="flex items-center gap-4 text-xs text-gray-500">
           <span>
             <span className="text-gray-600">Waiting </span>
-            <span className="text-gray-400">{formatWaitTime(waitingMinutes)}</span>
+            <span className="text-gray-400">
+              {formatWaitTime(waitingMinutes)}
+            </span>
           </span>
           <span>
             <span className="text-gray-600">Messages </span>
@@ -68,7 +78,7 @@ function ConversationDetail({ conversation }: ConversationDetailProps) {
             <span>
               <span className="text-gray-600">Assigned to </span>
               <span className="text-emerald-400">
-                {assignedTo === 'You' ? 'You' : assignedTo}
+                {assignedTo === "You" ? "You" : assignedTo}
               </span>
             </span>
           )}
@@ -99,13 +109,18 @@ function ConversationDetail({ conversation }: ConversationDetailProps) {
         </div>
       </div>
 
-      {/* ActionBar */}
-      <div className="px-6 py-4 border-t border-gray-800">
-        <p className="text-xs text-gray-600">Actions coming in Task 4.3</p>
-      </div>
-
+      {/* Action Bar */}
+      <ActionBar
+        conversationId={conversation.id}
+        assignedTo={assignedTo}
+        status={status}
+        assignState={assignState}
+        resolveState={resolveState}
+        onAssign={assign}
+        onResolve={resolve}
+      />
     </div>
-  )
+  );
 }
 
-export default ConversationDetail
+export default ConversationDetail;
