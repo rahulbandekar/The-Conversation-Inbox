@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { ActionState } from "../types";
 
-interface ActionStatus {
+export interface ActionStatus {
   state: ActionState;
   error: string | null;
 }
