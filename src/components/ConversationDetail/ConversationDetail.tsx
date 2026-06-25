@@ -40,7 +40,7 @@ function ConversationDetail({
 
   return (
     <div
-      className="flex flex-col h-full overflow-hidden"
+      className="flex flex-col h-full overflow-hidden motion-safe:animate-fade-in"
       role="region"
       aria-label="Conversation detail"
     >

@@ -44,10 +44,10 @@ function ConversationItem({
       aria-label={`${customerName}, ${subject}, ${priority} priority, ${formatWaitTime(
         waitingMinutes
       )}`}
-      className={`w-full text-left px-4 py-3 border-b border-gray-800/60 transition-colors focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-500 ${
+      className={`w-full text-left px-4 py-3 border-b border-gray-800/60 border-l-2 transition-colors focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-500 ${
         isSelected
-          ? "bg-gray-800 border-l-2 border-l-emerald-500"
-          : "hover:bg-gray-900"
+          ? "bg-gray-800 border-l-emerald-500"
+          : "border-l-transparent hover:bg-gray-900"
       }`}
     >
       {/* Row 1 — Name + wait time */}

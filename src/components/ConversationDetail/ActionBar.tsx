@@ -29,24 +29,24 @@ function ActionBar({
     <div className="px-6 py-4 border-t border-gray-800 flex flex-col gap-3">
       {/* Error messages */}
       {assignState.state === "error" && assignState.error !== null && (
-        <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 rounded px-3 py-2">
+        <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 rounded px-3 py-2 motion-safe:animate-fade-in">
           {assignState.error}
         </p>
       )}
       {resolveState.state === "error" && resolveState.error !== null && (
-        <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 rounded px-3 py-2">
+        <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 rounded px-3 py-2 motion-safe:animate-fade-in">
           {resolveState.error}
         </p>
       )}
 
       {/* Success messages */}
       {assignState.state === "success" && (
-        <p className="text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded px-3 py-2">
+        <p className="text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded px-3 py-2 motion-safe:animate-fade-in">
           Assigned to you. You are now responsible for this conversation.
         </p>
       )}
       {resolveState.state === "success" && (
-        <p className="text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded px-3 py-2">
+        <p className="text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded px-3 py-2 motion-safe:animate-fade-in">
           Conversation resolved. Well done.
         </p>
       )}
