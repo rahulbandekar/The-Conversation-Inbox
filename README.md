@@ -2,7 +2,7 @@
 
 A triage tool for escalated customer conversations. Built so a CX agent can look at a full queue and know, within seconds, what needs them first.
 
-**Live demo:**
+**Live demo:** https://the-conversation-inbox.vercel.app
 
 **Repo:** https://github.com/rahulbandekar/The-Conversation-Inbox
 
@@ -105,19 +105,22 @@ Shortcuts are disabled while focus is inside an `<input>`, `<textarea>`, or `<se
 - **No persisted state.** Filter selection and scroll position reset on page reload; there's no URL/localStorage sync.
 - **No pagination or virtualization.** Fine at 15 mock conversations; a queue of hundreds would need a virtualized list.
 - **Mock data is in-memory only.** Assign/Resolve actions mutate an in-memory array in the MSW handler — a full page reload resets all conversations to their seeded state.
-- **No automated tests.** Given the time budget, manual QA (Phase 6.5) covered loading/empty/error/action states instead of a test suite.
+- **No automated tests.** Given the time budget, manual QA covered loading/empty/error/action states instead of a test suite.
 - **No optimistic UI on actions.** Assign/Resolve wait for the (simulated) network round-trip before updating state, rather than updating immediately and rolling back on failure. Chosen for simplicity given the explicit 20%-failure requirement — an optimistic-then-rollback pattern would add complexity without a clear UX win at this scale.
+- **MSW runs in development only.** In production, the app falls back to
+  importing mock data directly — fetch calls return 404 from Vercel,
+  which the catch block handles gracefully. All functionality works
+  identically in both environments.
 
 ## Time Spent
 
-
-| Phase                                     | Time             |
-| ----------------------------------------- | ---------------- |
-| Setup (Vite, TS, Tailwind, MSW)           | ~\_\_            |
-| Types, mock data, MSW handlers            | ~\_\_            |
-| Layout, FilterBar, ConversationList       | ~\_\_            |
-| ConversationDetail, actions, error states | ~\_\_            |
-| Keyboard navigation                       | ~\_\_            |
-| Polish, accessibility, motion             | ~\_\_            |
-| README + deploy                           | ~\_\_            |
-| **Total**                                 | **~ 2 evenings** |
+| Phase                                     | Time                       |
+| ----------------------------------------- | -------------------------- |
+| Setup (Vite, TS, Tailwind, MSW)           | ~1 hr                      |
+| Types, mock data, MSW handlers            | ~1 hr                      |
+| Layout, FilterBar, ConversationList       | ~1.5 hrs                   |
+| ConversationDetail, actions, error states | ~2 hrs                     |
+| Keyboard navigation                       | ~1 hr                      |
+| Polish, accessibility, motion             | ~1 hr                      |
+| README + deploy + bug fix                 | ~20min - 1 hr              |
+| **Total**                                 | **~8.5 hrs (~2 evenings)** |
